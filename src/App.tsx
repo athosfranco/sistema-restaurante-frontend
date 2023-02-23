@@ -7,7 +7,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useMemo, useState } from "react";
-import useDarkMode from "./hooks/useDarkMode";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -28,7 +27,7 @@ function App() {
             styleOverrides: {
               root: {
                 textTransform: "none",
-                borderRadius: 8,
+                borderRadius: 18,
               },
             },
             defaultProps: {
