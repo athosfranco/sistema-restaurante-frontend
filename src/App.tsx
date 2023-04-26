@@ -1,25 +1,34 @@
-import "./App.css";
-import {
-  Button,
-  Card,
-  createTheme,
-  ThemeProvider,
-  Typography,
-} from "@mui/material";
-import { useMemo, useState } from "react";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { useMemo } from "react";
+import Dashboard from "./webapp/pages/Dashboard/Dashboard";
+import { usePreferencesStore } from "./stores/usePreferences";
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode } = usePreferencesStore();
   const theme = useMemo(
     () =>
       createTheme({
+        typography: {
+          fontFamily: ["Montserrat", "sans-serif"].join(","),
+        },
         palette: {
           mode: isDarkMode ? "dark" : "light",
+          background: {
+            default: isDarkMode ? "#303030" : "#fafafa",
+            paper: isDarkMode ? "#1e1e1e" : "#fafafa",
+          },
+
           primary: {
-            main: "#3f51b5",
+            light: "#7986cb",
+            main: "#DD5353",
+            dark: "#303f9f",
+            contrastText: "#fff",
           },
           secondary: {
+            light: "#ff4081",
             main: "#f50057",
+            dark: "#c51162",
+            contrastText: "#fff",
           },
         },
         components: {
@@ -42,20 +51,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Card sx={{ p: 10 }}>
-        <div>
-          <h2>Vite + React + MUI + Zustand + Router + Recharts + dayjs </h2>
-          <Button color="primary" onClick={() => setIsDarkMode(!isDarkMode)}>
-            {isDarkMode ? "Tema claro" : "Tema escuro"}
-          </Button>
-        </div>
-        <Typography variant="body1" className="card">
-          Template by{" "}
-          <a href="https://github.com/athosfranco" target="_blank">
-            Athos Franco
-          </a>
-        </Typography>
-      </Card>
+      <Dashboard />
     </ThemeProvider>
   );
 }
